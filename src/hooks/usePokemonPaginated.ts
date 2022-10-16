@@ -48,5 +48,6 @@ export const usePokemonPaginated = () => {
   return {
     isLoading,
     simplePokemon,
+    loadPokemon,
   };
 };
