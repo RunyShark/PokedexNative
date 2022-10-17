@@ -1,8 +1,16 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import {RoutesTemplate, RouteProps} from '../index';
+import {RoutesTemplate, RouteProps, SimplePokemon} from '../index';
 
-const Stack = createStackNavigator();
+interface RouteStackProps {
+  HomeScreen: undefined;
+  PokemonScreen: {
+    simplePokemon: SimplePokemon;
+    color: string;
+  };
+}
+
+const Stack = createStackNavigator<any>();
 
 export const Navigator = () => {
   return (
