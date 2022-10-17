@@ -1,7 +1,7 @@
 export interface RouteProps {
   title: string;
   name: string;
-  component: () => JSX.Element;
+  component: () => JSX.Element | JSX.Element[];
 }
 export interface PokemonPaginatedResponse {
   count: number;

@@ -1,16 +1,13 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import {RoutesTemplate, RouteProps, SimplePokemon} from '../index';
+import {SimplePokemon, HomeScreen, PokemonScreen} from '../index';
 
-interface RouteStackProps {
+export type RootStackParams = {
   HomeScreen: undefined;
-  PokemonScreen: {
-    simplePokemon: SimplePokemon;
-    color: string;
-  };
-}
+  PokemonScreen: {simplePokemon: SimplePokemon; color: string};
+};
 
-const Stack = createStackNavigator<any>();
+const Stack = createStackNavigator<RootStackParams>();
 
 export const Navigator = () => {
   return (
@@ -19,14 +16,16 @@ export const Navigator = () => {
         headerShown: false,
         cardStyle: {backgroundColor: 'white'},
       }}>
-      {RoutesTemplate.map(({component, name, title}: RouteProps) => (
-        <Stack.Screen
-          name={name}
-          component={component}
-          options={{title: title}}
-          key={name}
-        />
-      ))}
+      <Stack.Screen
+        name={'HomeScreen'}
+        component={HomeScreen}
+        options={{title: 'HomeScreen'}}
+      />
+      <Stack.Screen
+        name={'PokemonScreen'}
+        component={PokemonScreen}
+        options={{title: 'PokemonScreen'}}
+      />
     </Stack.Navigator>
   );
 };
