@@ -1,13 +1,13 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {Image, Text, FlatList, ActivityIndicator} from 'react-native';
-
+import {Image, FlatList, ActivityIndicator, Text, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {styles, usePokemonPaginated, FadeInImage} from '../../index';
+
+import {styles, usePokemonPaginated, PokemonCard} from '../../index';
 
 export const HomeScreen = () => {
   const {top} = useSafeAreaInsets();
-  const {isLoading, simplePokemon, loadPokemon} = usePokemonPaginated();
+  const {simplePokemon, loadPokemon} = usePokemonPaginated();
   console.log('simplePokemon', simplePokemon);
 
   return (
@@ -16,26 +16,33 @@ export const HomeScreen = () => {
         source={require('../../assets/pokebola.png')}
         style={styles.pokeBoolBG}
       />
-      <FlatList
-        data={simplePokemon}
-        showsVerticalScrollIndicator={false}
-        renderItem={({item: {picture}}) => (
-          <FadeInImage uri={picture} style={{width: 100, height: 100}} />
-        )}
-        keyExtractor={pokemon => pokemon.id}
-        onEndReached={loadPokemon}
-        onEndReachedThreshold={0.4}
-        ListFooterComponent={
-          <ActivityIndicator style={{height: 100}} size={20} color="grey" />
-        }
-      />
-      {/* <Text
+      <View
         style={{
-          ...styles.title,
-          top: top + 20,
+          alignItems: 'center',
         }}>
-        Poke Dex
-      </Text> */}
+        <FlatList
+          data={simplePokemon}
+          numColumns={2}
+          showsVerticalScrollIndicator={false}
+          renderItem={({item}) => <PokemonCard {...item} />}
+          keyExtractor={pokemon => pokemon.id}
+          onEndReached={loadPokemon}
+          onEndReachedThreshold={0.4}
+          ListHeaderComponent={
+            <Text
+              style={{
+                ...styles.title,
+                top: top + 20,
+                marginBottom: top + 20,
+              }}>
+              Poke Dex
+            </Text>
+          }
+          ListFooterComponent={
+            <ActivityIndicator style={{height: 100}} size={20} color="grey" />
+          }
+        />
+      </View>
     </>
   );
 };
