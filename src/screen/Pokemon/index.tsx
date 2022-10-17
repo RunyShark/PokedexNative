@@ -15,7 +15,7 @@ export const PokemonScreen = ({navigation, route}: Props) => {
     simplePokemon: {id, name, picture},
   } = route.params;
   const {sprites} = usePokemon(id);
-  console.log('front_default', sprites);
+  console.log('front_default', sprites?.front_default);
 
   return (
     <View>
@@ -41,8 +41,11 @@ export const PokemonScreen = ({navigation, route}: Props) => {
           source={require('../../assets/pokebola-blanca.png')}
           style={styles.pokebola}
         />
-
         <FadeInImage uri={picture} style={styles.pokemonImage} />
+        <FadeInImage
+          uri={sprites?.front_default}
+          style={styles.pokemonImageBtn}
+        />
       </View>
     </View>
   );

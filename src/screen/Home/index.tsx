@@ -8,7 +8,6 @@ import {styles, usePokemonPaginated, PokemonCard} from '../../index';
 export const HomeScreen = () => {
   const {top} = useSafeAreaInsets();
   const {simplePokemon, loadPokemon} = usePokemonPaginated();
-  console.log('simplePokemon', simplePokemon);
 
   return (
     <>
