@@ -33,7 +33,7 @@ export const PokemonCard = ({name, id, picture, color}: PokemonCardProps) => {
       onPress={() =>
         navigate('PokemonScreen', {
           simplePokemon: {name, id, picture, color},
-          color,
+          color: bgColor,
         })
       }>
       <View
