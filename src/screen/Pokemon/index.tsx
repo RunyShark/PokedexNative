@@ -1,9 +1,9 @@
 import {StackScreenProps} from '@react-navigation/stack';
 import React from 'react';
-import {Text, View, TouchableOpacity} from 'react-native';
+import {Text, View, TouchableOpacity, Image} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {RootStackParams} from '../../index';
+import {RootStackParams, FadeInImage, usePokemon} from '../../index';
 import {styles} from './PokemonStyle';
 
 interface Props extends StackScreenProps<RootStackParams, 'PokemonScreen'> {}
@@ -14,6 +14,8 @@ export const PokemonScreen = ({navigation, route}: Props) => {
     color,
     simplePokemon: {id, name, picture},
   } = route.params;
+  const {sprites} = usePokemon(id);
+  console.log('front_default', sprites);
 
   return (
     <View>
@@ -27,6 +29,20 @@ export const PokemonScreen = ({navigation, route}: Props) => {
           onPress={() => navigation.pop()}>
           <Icon name="arrow-back-outline" color="white" size={35} />
         </TouchableOpacity>
+        <Text
+          style={{
+            ...styles.PokeName,
+            top: top + 40,
+          }}>
+          {name + '\n'}#{id}
+        </Text>
+
+        <Image
+          source={require('../../assets/pokebola-blanca.png')}
+          style={styles.pokebola}
+        />
+
+        <FadeInImage uri={picture} style={styles.pokemonImage} />
       </View>
     </View>
   );

@@ -13,4 +13,22 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     left: 20,
   },
+  PokeName: {
+    color: 'white',
+    fontSize: 40,
+    alignSelf: 'flex-start',
+    left: 20,
+  },
+  pokebola: {
+    width: 250,
+    height: 250,
+    bottom: -20,
+    opacity: 0.7,
+  },
+  pokemonImage: {
+    width: 250,
+    height: 250,
+    position: 'absolute',
+    bottom: -20,
+  },
 });
