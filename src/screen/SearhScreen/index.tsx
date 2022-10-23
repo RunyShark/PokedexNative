@@ -1,8 +1,14 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, {useState} from 'react';
 import {Dimensions, FlatList, Platform, Text, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {Loading, PokemonCard, SearchInput, usePokemonSearch} from '../../index';
+import {
+  Loading,
+  PokemonCard,
+  SearchInput,
+  usePokemonSearch,
+  useDebounce,
+} from '../../index';
 
 import {styles} from './SearchStyle';
 
