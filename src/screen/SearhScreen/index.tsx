@@ -1,13 +1,24 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {Platform, View} from 'react-native';
+import {ActivityIndicator, Platform, Text, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {SearchInput} from '../../index';
+import {SearchInput, usePokemonSearch} from '../../index';
 
 import {styles} from './SearchStyle';
 
 export const SearhScreen = () => {
   const {top} = useSafeAreaInsets();
+  const {isFetching, simplePokemon} = usePokemonSearch();
+
+  if (isFetching) {
+    return (
+      <View style={styles.activityContainer}>
+        <ActivityIndicator size={50} color="grey" />
+        <Text>Login...</Text>
+      </View>
+    );
+  }
+
   return (
     <View
       style={{
