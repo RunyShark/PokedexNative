@@ -24,6 +24,7 @@ export const usePokemon = (id: string) => {
 
   return {
     ...detailsPokemon,
+    detailsPokemon,
     isLoading,
     getPokemonDetail,
   };

@@ -1,9 +1,21 @@
+/* eslint-disable react-native/no-inline-styles */
 import {StackScreenProps} from '@react-navigation/stack';
 import React from 'react';
-import {Text, View, TouchableOpacity, Image} from 'react-native';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  ActivityIndicator,
+} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {RootStackParams, FadeInImage, usePokemon} from '../../index';
+import {
+  RootStackParams,
+  FadeInImage,
+  usePokemon,
+  PokemonDetails,
+} from '../../index';
 import {styles} from './PokemonStyle';
 
 interface Props extends StackScreenProps<RootStackParams, 'PokemonScreen'> {}
@@ -14,11 +26,11 @@ export const PokemonScreen = ({navigation, route}: Props) => {
     color,
     simplePokemon: {id, name, picture},
   } = route.params;
-  const {sprites} = usePokemon(id);
+  const {sprites, isLoading, detailsPokemon} = usePokemon(id);
   console.log('front_default', sprites?.front_default);
 
   return (
-    <View>
+    <View style={{flex: 1}}>
       <View
         style={{
           ...styles.hederContainer,
@@ -47,6 +59,13 @@ export const PokemonScreen = ({navigation, route}: Props) => {
           style={styles.pokemonImageBtn}
         />
       </View>
+      {isLoading ? (
+        <View style={styles.loadingIndicator}>
+          <ActivityIndicator color={color} size={50} />
+        </View>
+      ) : (
+        <PokemonDetails {...detailsPokemon} />
+      )}
     </View>
   );
 };

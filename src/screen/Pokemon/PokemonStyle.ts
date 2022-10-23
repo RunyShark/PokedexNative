@@ -40,4 +40,9 @@ export const styles = StyleSheet.create({
     left: 150,
   },
   detail: {},
+  loadingIndicator: {
+    flex: 1,
+    justifyContent: 'center',
+    height: 200,
+  },
 });
