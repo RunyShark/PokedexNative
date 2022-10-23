@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useState} from 'react';
 import {StyleProp, View, ViewStyle} from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
@@ -6,13 +7,17 @@ import {useDebounce} from '../../hooks';
 import {styles} from './SearchInputStyle';
 interface SearchProps {
   style?: StyleProp<ViewStyle>;
+  onDebone: (value: string) => void;
 }
 
-export const SearchInput = ({style}: SearchProps) => {
+export const SearchInput = ({style, onDebone}: SearchProps) => {
   const [input, setInput] = useState('');
-  const debounceValue = useDebounce({input, time: 700});
+  const debounceValue = useDebounce({input, time: 800});
 
-  useEffect(() => {}, [debounceValue]);
+  useEffect(() => {
+    onDebone(debounceValue);
+  }, [debounceValue]);
+
   return (
     <View
       style={{

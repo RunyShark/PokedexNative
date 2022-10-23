@@ -2,19 +2,14 @@
 import React, {useState} from 'react';
 import {Dimensions, FlatList, Platform, Text, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {
-  Loading,
-  PokemonCard,
-  SearchInput,
-  usePokemonSearch,
-  useDebounce,
-} from '../../index';
+import {Loading, PokemonCard, SearchInput, usePokemonSearch} from '../../index';
 
 import {styles} from './SearchStyle';
 
 const {width: screenWidth} = Dimensions.get('window');
 
 export const SearhScreen = () => {
+  const [term, setTerm] = useState('');
   const {top} = useSafeAreaInsets();
   const {isFetching, simplePokemon} = usePokemonSearch();
 
@@ -28,6 +23,7 @@ export const SearhScreen = () => {
         ...styles.container,
       }}>
       <SearchInput
+        onDebone={value => setTerm(value)}
         style={{
           position: 'absolute',
           zIndex: 999,
@@ -50,7 +46,7 @@ export const SearhScreen = () => {
               marginBottom: top + 60,
               marginHorizontal: 20,
             }}>
-            Search Pokemon
+            Search {term}
           </Text>
         }
       />
