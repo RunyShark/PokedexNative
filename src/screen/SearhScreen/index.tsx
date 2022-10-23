@@ -1,8 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {ActivityIndicator, Platform, Text, View} from 'react-native';
+import {FlatList, Platform, Text, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {SearchInput, usePokemonSearch} from '../../index';
+import {Loading, PokemonCard, SearchInput, usePokemonSearch} from '../../index';
 
 import {styles} from './SearchStyle';
 
@@ -11,12 +11,7 @@ export const SearhScreen = () => {
   const {isFetching, simplePokemon} = usePokemonSearch();
 
   if (isFetching) {
-    return (
-      <View style={styles.activityContainer}>
-        <ActivityIndicator size={50} color="grey" />
-        <Text>Login...</Text>
-      </View>
-    );
+    return <Loading />;
   }
 
   return (
@@ -24,9 +19,25 @@ export const SearhScreen = () => {
       style={{
         ...styles.container,
         marginTop: Platform.OS === 'ios' ? top : top + 10,
-        marginHorizontal: 20,
       }}>
       <SearchInput />
+      <FlatList
+        data={simplePokemon}
+        numColumns={2}
+        showsVerticalScrollIndicator={false}
+        renderItem={({item}) => <PokemonCard {...item} />}
+        keyExtractor={pokemon => pokemon.id}
+        ListHeaderComponent={
+          <Text
+            style={{
+              ...styles.title,
+              top: top + 20,
+              marginBottom: top + 20,
+            }}>
+            Search Pokemon
+          </Text>
+        }
+      />
     </View>
   );
 };
