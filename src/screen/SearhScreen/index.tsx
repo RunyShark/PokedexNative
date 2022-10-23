@@ -25,11 +25,18 @@ export const SearhScreen = () => {
     if (term.length === 0) {
       return setPokemonFilter([]);
     }
-    setPokemonFilter(
-      simplePokemon.filter(poke =>
-        poke.name.toLowerCase().includes(term.toLowerCase()),
-      ),
-    );
+
+    if (isNaN(Number(term))) {
+      setPokemonFilter(
+        simplePokemon.filter(poke =>
+          poke.name.toLowerCase().includes(term.toLowerCase()),
+        ),
+      );
+    } else {
+      const pokemon = simplePokemon.find(poke => poke.id === term);
+
+      setPokemonFilter(pokemon ? [pokemon] : []);
+    }
   }, [term]);
 
   if (isFetching) {
